@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Form from "./_components/upload_form";
+import { SignedIn } from "@clerk/nextjs";
 
 export default function HomePage() {
     return (
@@ -11,7 +12,12 @@ export default function HomePage() {
             <p className="text-lg">
                 Upload a PDF and get a random quote from it.
             </p>
-            <Form />
+            <SignedIn>
+                <Form />
+                <Link href="/quotes" className="text-lg font-bold">
+                    View Quotes
+                </Link>
+            </SignedIn>
         </main>
     );
 }
