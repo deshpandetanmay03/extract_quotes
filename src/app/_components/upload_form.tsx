@@ -1,35 +1,29 @@
 "use client";
 
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useState } from "react";
+import { upload_form_action } from "./upload_form_action";
+
+function onSubmit(e, setIsSubmitting) {
+    console.log(setIsSubmitting);
+    setIsSubmitting(true);
+}
 
 export default function UploadForm() {
+    const [ isSubmitting, setIsSubmitting ] = useState(false);
     return (
-        <Formik
-            initialValues={{
-                file: "",
-            }}
-            onSubmit={(values) => {
-                console.log(values);
-            }}
-        >
-            {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
-                <Form className="flex flex-col gap-4 border-solid border-2 border-highlight-high rounded-lg p-4 bg-surface">
-                    <label htmlFor="file" className="flex gap-2">
-                        <Field
-                            type="file"
-                            name="file"
-                            id="file"
-                            className="border-2 border-base rounded-lg p-4 text-lg bg-overlay"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                        />
-                        <ErrorMessage name="file" component="div" className="text-red-500" />
-                    </label>
-                    <button type="submit" className="bg-overlay text-pine rounded-lg p-4 text-lg" disabled={isSubmitting}>
-                        Generate Quote
-                    </button>
-                </Form>
-            )}
-        </Formik>
+        <form className="flex flex-col gap-4 border-solid border-2 border-highlight-high rounded-lg p-4 bg-surface" onSubmit={(e) => onSubmit(e, setIsSubmitting)} action={upload_form_action}>
+            <label htmlFor="file" className="flex gap-2">
+                <input
+                    type="file"
+                    name="file"
+                    accept="application/pdf"
+                    id="file"
+                    className="border-2 border-base rounded-lg p-4 text-lg bg-overlay"
+                />
+            </label>
+            <button type="submit" className="bg-overlay text-pine rounded-lg p-4 text-lg disabled:cursor-not-allowed disabled:bg-muted" disabled={isSubmitting}>
+                Generate Quote
+            </button>
+        </form>
     );
 }

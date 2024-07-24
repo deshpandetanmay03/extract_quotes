@@ -6,10 +6,10 @@ export default function TopBar() {
         <header className="bg-overlay p-4 flex justify-between items-center fixed top-0 left-0 right-0 z-10 h-16">
             <h1 className="text-2xl font-bold">PDF Quotes</h1>
             <SignedOut>
-                <SignInButton>Sign in</SignInButton>
+                <SignInButton />
             </SignedOut>
             <SignedIn>
-                <UserButton>Signed in</UserButton>
+                <UserButton />
             </SignedIn>
             <nav className="flex gap-4">
                 <Link href="/">Home</Link>
